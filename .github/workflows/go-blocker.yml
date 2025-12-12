@@ -1,0 +1,16 @@
+name: Go Blocker
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Block new Go files
+        run: |
+          NEW_GO=$(git diff --name-only --diff-filter=A HEAD~1 2>/dev/null | grep -E '\.go$' || true)
+          if [ -n "$NEW_GO" ]; then
+            echo "❌ New Go files detected. Use Rust instead:"
+            echo "$NEW_GO"
+            exit 1
+          fi
+          echo "✅ No new Go files (Rust policy enforced)"
