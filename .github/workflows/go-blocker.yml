@@ -1,10 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 name: Go Blocker
+
 on: [push, pull_request]
+
+permissions: read-all
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: Block new Go files
         run: |
           NEW_GO=$(git diff --name-only --diff-filter=A HEAD~1 2>/dev/null | grep -E '\.go$' || true)
