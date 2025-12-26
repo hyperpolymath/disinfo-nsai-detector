@@ -1,4 +1,4 @@
-= disinfo-nsai-detector
+= disinfo-nesy-detector
 Jonathan D.A. Jewell <jonathan.jewell@gmail.com>
 :toc: macro
 :icons: font
