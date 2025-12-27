@@ -11,13 +11,21 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      - name: Block new Go files
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Block ALL Go files
         run: |
-          NEW_GO=$(git diff --name-only --diff-filter=A HEAD~1 2>/dev/null | grep -E '\.go$' || true)
-          if [ -n "$NEW_GO" ]; then
-            echo "❌ New Go files detected. Use Rust instead:"
-            echo "$NEW_GO"
+          # Check for ANY .go files in the repository
+          GO_FILES=$(find . -name "*.go" -type f 2>/dev/null | grep -v vendor || true)
+          if [ -n "$GO_FILES" ]; then
+            echo "❌ Go files detected. Use Rust instead (per CLAUDE.md policy):"
+            echo "$GO_FILES"
             exit 1
           fi
-          echo "✅ No new Go files (Rust policy enforced)"
+
+          # Check for go.mod/go.sum
+          if [ -f "go.mod" ] || [ -f "go.sum" ]; then
+            echo "❌ Go module files detected (go.mod/go.sum). Remove them."
+            exit 1
+          fi
+
+          echo "✅ No Go files found (Rust-only policy enforced)"

@@ -1,6 +1,9 @@
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2024 Hyperpolymath
+
 syntax = "proto3";
+
 package model_pb;
-option go_package = "gitlab.com/hyperpolymath/disinfo-nsai-detector/pkg/model_pb";
 
 message AnalysisInput {
     string content_hash = 1;

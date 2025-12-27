@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2024 Hyperpolymath
+
+[package]
+name = "disinfo-nesy-detector"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Neuro-Symbolic AI Disinformation Detector"
+repository = "https://gitlab.com/hyperpolymath/disinfo-nesy-detector"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1.42", features = ["full", "signal"] }
+
+# NATS JetStream
+async-nats = "0.38"
+
+# Protobuf
+prost = "0.13"
+
+# Prometheus metrics
+prometheus = { version = "0.13", features = ["process"] }
+hyper = { version = "1.5", features = ["server", "http1"] }
+hyper-util = { version = "0.1", features = ["tokio", "server-auto"] }
+http-body-util = "0.1"
+
+# ONNX Runtime (optional, enable when model is ready)
+# ort = { version = "2.0", features = ["load-dynamic"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+anyhow = "1.0"
+thiserror = "2.0"
+
+# Async utilities
+futures = "0.3"
+
+[[bin]]
+name = "nsai-detector"
+path = "src/main.rs"
