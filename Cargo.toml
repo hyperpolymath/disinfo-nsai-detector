@@ -11,7 +11,7 @@ repository = "https://gitlab.com/hyperpolymath/disinfo-nesy-detector"
 
 [dependencies]
 # Async runtime
-tokio = { version = "1.42", features = ["full", "signal"] }
+tokio = { version = "1.49", features = ["full", "signal"] }
 
 # NATS JetStream
 async-nats = "0.45"
