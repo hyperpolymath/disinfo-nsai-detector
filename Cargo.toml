@@ -14,7 +14,7 @@ repository = "https://gitlab.com/hyperpolymath/disinfo-nesy-detector"
 tokio = { version = "1.49", features = ["full", "signal"] }
 
 # NATS JetStream
-async-nats = "0.45"
+async-nats = "0.46"
 
 # Protobuf
 prost = "0.14"
